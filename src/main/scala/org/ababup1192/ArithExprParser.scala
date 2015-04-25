@@ -22,9 +22,10 @@ object ArithExprParser extends RegexParsers {
   def expr: Parser[AST] = chainl1(term, calc("+") | calc("-"))
 
   def calc(operand: String) = operand ^^ { op => (left: AST, right: AST) =>
-    if (op == "+") AddOp(left, right)
-    else if (op == "-") SubOp(left, right)
-    else IntVal(0)
+    op match {
+      case "+" => AddOp(left, right)
+      case "-" => SubOp(left, right)
+    }
   }
 
   def term: Parser[AST] = chainl1(factor, "*" ^^ { case op => (l: AST, r: AST) => MulOp(l, r) })
