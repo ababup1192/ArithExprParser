@@ -32,5 +32,5 @@ object ArithExprParser extends RegexParsers {
 
   def factor: Parser[AST] = intLiteral | "(" ~> expr <~ ")"
 
-  def parse(input: String): ParseResult[Any] = parseAll(expr, input)
+  def parse(input: String): ParseResult[AST] = parseAll(expr, input)
 }
