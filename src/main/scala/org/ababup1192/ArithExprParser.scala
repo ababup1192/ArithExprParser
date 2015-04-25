@@ -28,7 +28,7 @@ object ArithExprParser extends RegexParsers {
     }
   }
 
-  def term: Parser[AST] = chainl1(factor, "*" ^^ { case op => (l: AST, r: AST) => MulOp(l, r) })
+  def term: Parser[AST] = chainl1(factor, "*" ^^ { op => (l: AST, r: AST) => MulOp(l, r) })
 
   def factor: Parser[AST] = intLiteral | "(" ~> expr <~ ")"
 
